@@ -15,7 +15,6 @@
     "node",
     "js"
   ],
-  "type": "module",
   "author": "alexey turdakov <alexeyturdakov@gmail.com>",
   "license": "ISC",
   "bugs": {
@@ -23,7 +22,8 @@
   },
   "homepage": "https://github.com/AlexeyTurdakov/GB_nodeJS#readme",
   "dependencies": {
-    "colors": "^1.4.0"
+    "colors": "^1.4.0",
+    "moment-precise-range-plugin": "^1.3.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.9"
