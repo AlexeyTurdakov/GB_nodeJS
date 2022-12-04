@@ -1,31 +1,20 @@
 {
-  "name": "gb_nodejs",
-  "version": "1.0.0",
-  "description": "node js gb",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AlexeyTurdakov/GB_nodeJS.git"
-  },
-  "keywords": [
-    "node",
-    "js"
-  ],
-  "author": "alexey turdakov <alexeyturdakov@gmail.com>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AlexeyTurdakov/GB_nodeJS/issues"
-  },
-  "homepage": "https://github.com/AlexeyTurdakov/GB_nodeJS#readme",
-  "dependencies": {
-    "colors": "^1.4.0",
-    "moment-precise-range-plugin": "^1.3.0"
-  },
-  "devDependencies": {
-    "@types/node": "^18.11.9"
-  }
+	"name": "lesson_4",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "node index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"license": "ISC",
+	"dependencies": {
+		"colors": "^1.4.0",
+		"dateformat": "^5.0.3",
+		"dayjs": "^1.10.8",
+		"moment": "^2.29.1",
+		"moment-precise-range-plugin": "^1.3.0",
+		"inquirer": "^8.2.0",
+		"yargs": "^17.2.1"
+	}
 }
