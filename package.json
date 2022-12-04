@@ -1,31 +1,29 @@
 {
   "name": "gb_nodejs",
   "version": "1.0.0",
-  "description": "node js gb",
+  "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node index.js"
+    "dev": "node index.js",
+    "serve": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "reader": "cli.js"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AlexeyTurdakov/GB_nodeJS.git"
+    "type": "git"
   },
-  "keywords": [
-    "node",
-    "js"
-  ],
-  "author": "alexey turdakov <alexeyturdakov@gmail.com>",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AlexeyTurdakov/GB_nodeJS/issues"
   },
-  "homepage": "https://github.com/AlexeyTurdakov/GB_nodeJS#readme",
   "dependencies": {
     "colors": "^1.4.0",
-    "moment-precise-range-plugin": "^1.3.0"
-  },
-  "devDependencies": {
-    "@types/node": "^18.11.9"
+    "dayjs": "^1.10.8",
+    "inquirer": "^8.2.0",
+    "yargs": "^17.2.1"
   }
 }

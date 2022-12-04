@@ -1,42 +1,37 @@
-const EventEmitter = require('events'),
-	emitter = new EventEmitter()
-require('moment-precise-range-plugin')
-const moment = require('moment')
+import fs from 'fs';
+import path from 'path';
+import http from 'http';
+const HTML_TEMPLATE = './index_template.html';
+const HTML_TO_DISPLAY = path.join(path.resolve(), 'index.html');
 
-const [userPastDate] = process.argv.slice(2)
-const format = 'YYYY-MM-DD HH'
+const isDir = (dirPath) => fs.lstatSync(dirPath).isDirectory();
 
-const getDateFromDateString = dateString => {
-	const [hour, day, month, year] = dateString.split('-')
-	return new Date(Date.UTC(year, month - 1, day, hour))
-}
+http.createServer((req, res) => {
+    const reqPath = path.join(path.resolve(), req.url);
 
-const dateInFuture = getDateFromDateString(userPastDate)
+    if (isDir(reqPath)) {
+        const dirContent = fs.readdirSync(reqPath);
+        makeResultHTML(displayDirContent(req.url, dirContent));
+    } else {
+        makeResultHTML(fs.readFileSync(reqPath, 'utf-8'));
+    }
 
-const showRemainingTime = dateInFuture => {
-	const dateNow = new Date()
 
-	if (dateNow >= dateInFuture) {
-		emitter.emit('timerEnd')
-	} else {
-		const currentDateFormatted = moment(dateNow, format)
-		const futureDateFormatted = moment(dateInFuture, format)
-		const diff = moment.preciseDiff(currentDateFormatted, futureDateFormatted)
+    const readStream = fs.createReadStream(HTML_TO_DISPLAY);
+    res.writeHead(200, { 'Content-Type': 'text/html'});
+    readStream.pipe(res);
+}).listen(3001, 'localhost');
 
-		console.log(diff)
-	}
-}
+const displayDirContent = (currentPath, list) => {
+    let htmlList = '';
+    htmlList += '<ul>';
+    htmlList += list.reduce((list, item) => list+=`<li><a href="${currentPath == '/' ? currentPath + item : currentPath + '/' + item}">${item}</a></li>`, '');
+    htmlList += '</ul>';
+    return htmlList;
+};
 
-const timerId = setInterval(() => {
-	emitter.emit('timerTick', dateInFuture)
-}, 1000)
-
-const showTimerDone = timerId => {
-	clearInterval(timerId)
-	console.log('End')
-}
-
-emitter.on('timerTick', showRemainingTime)
-emitter.on('timerEnd', () => {
-	showTimerDone(timerId)
-})
+const makeResultHTML = (toPresent) => {
+    let template = fs.readFileSync(HTML_TEMPLATE, 'utf-8');
+    template = template.replace('{{data}}', toPresent);
+    fs.writeFileSync('./index.html', template);
+};
